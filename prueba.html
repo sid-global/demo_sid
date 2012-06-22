@@ -1,0 +1,48 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title></title>
+</head>
+<body>
+<script language="javascript">
+function obtener_localizacion() {
+  if (navigator.geolocation) {
+  		navigator.geolocation.getCurrentPosition(coordenadas,gestiona_errores);
+  }else{
+	alert('Tu navegador no soporta la API de geolocalizacion');  
+  }
+}
+/*function coordenadas() {
+  var latitud = 4.5737489;
+  var longitud = -74.1092798;
+  alert('Tus coordenadas son: ('+latitud+','+longitud+')');
+}*/
+
+function coordenadas() {
+	//var latitud = position.coords.latitude;
+	//var longitud = position.coords.longitude;
+	var latitud = 10.5;
+  	var longitud = -66.91667;
+	var mapa = document.getElementById("mapa");
+	mapa.src = "http://maps.google.com/maps/api/staticmap?center=" + latitud + "," + longitud + "&zoom=15&size=400x400&markers=color:green|label:A|" + latitud + "," + longitud + "&sensor=false";
+}
+function gestiona_errores(err) {
+  if (err.code == 0) {
+    alert("error desconocido");
+  }
+  if (err.code == 1) {
+    alert("El usuario no ha compartido su posicion");
+  }
+  if (err.code == 2) {
+    alert("no se puede obtener la posicion actual");
+  }
+  if (err.code == 3) {
+    alert("timeout recibiendo la posicion");
+  }
+}
+
+</script>
+<a onClick="coordenadas();">Mostrar Posición</a>
+<p><img id="mapa" src=""></p>
+</body>
+</html> 
